@@ -11,15 +11,16 @@ pricingRules = [
 
 class Products(Enum):
     @classmethod
-    def keys(cls):
+    def keys(cls) -> list:
         """Returns a list of all the enum keys."""
         return cls._member_names_
-        
+
     A = auto()
     B = auto()
     C = auto()
     D = auto()
     E = auto()
     F = auto()
+
 
 
