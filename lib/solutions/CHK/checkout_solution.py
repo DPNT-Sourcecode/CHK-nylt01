@@ -1,4 +1,5 @@
-from solutions.CHK import teller
+import teller
+import unittest
 
 # noinspection PyUnusedLocal
 # skus = unicode string
@@ -24,7 +25,5 @@ def checkout(skus):
 
     return runningtotal
 
-if __name__ == '__main__':
-    print(checkout('ABABA'))
 
 
