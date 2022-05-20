@@ -1,13 +1,14 @@
 import pricing
+from collections import defaultdict
 from typing import List
 
 class Checkout:
     def __init__(self, pricingRules:List[dict]):
         self.pricers = pricing.PricerFactory().get_pricers(pricingRules)
-        self.bundleBasket = []
+        self.bundleBasket = defaultdict()
 
     def add_item(self, item:str) -> None:
-        self.bundleBasket.append((item, self.pricers[item].unitPrice))
+        self.bundleBasket[item] += 1
         self.pricers[item].increment()
     
     def calculate_total(self, skus:str) -> int:
