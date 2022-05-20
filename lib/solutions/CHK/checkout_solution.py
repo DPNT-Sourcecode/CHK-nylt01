@@ -19,4 +19,3 @@ def checkout(skus):
     return runningtotal
 
 
-
