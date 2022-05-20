@@ -19,4 +19,8 @@ def checkout(skus):
     return runningtotal
 
 
+if __name__ == '__main__':
+    print(checkout('SSS'))
+
+
 
