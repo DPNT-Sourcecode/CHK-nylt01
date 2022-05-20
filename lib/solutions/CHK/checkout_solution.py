@@ -1,4 +1,4 @@
-import teller
+from solutions.CHK import teller
 
 # noinspection PyUnusedLocal
 # skus = unicode string
@@ -26,4 +26,5 @@ def checkout(skus):
 
 if __name__ == '__main__':
     print(checkout('ABABA'))
+
 
