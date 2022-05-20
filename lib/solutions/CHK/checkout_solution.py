@@ -1,5 +1,5 @@
-import teller
-import store_objects
+from . import teller
+from . import store_objects
 
 
 # noinspection PyUnusedLocal
@@ -21,5 +21,6 @@ def checkout(skus):
 ##CODE FOR TESTING
 if __name__ == '__main__':
     print(checkout('EEB'))
+
 
 

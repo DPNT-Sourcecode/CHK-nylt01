@@ -1,4 +1,4 @@
-import pricing
+from .import pricing
 from collections import defaultdict
 from typing import List
 
@@ -24,3 +24,4 @@ class Teller:
                 runningTotal += pricer.total()
 
         return runningTotal
+
