@@ -1,5 +1,7 @@
 from abc import ABC, abstractmethod
+from email.policy import default
 from typing import Dict, List, Tuple
+from collections import defaultdict
 import math
 
 class Pricer(ABC):
@@ -56,7 +58,7 @@ class BundlePricer(Pricer):
     def increment(self) -> None:
         self.quantity += 1
     
-    def total(self, bundleBasket:dict) -> Tuple[int, List[str]]: 
+    def total(self, bundleBasket:defaultdict) -> Tuple[int, List[str]]: 
         runningtotal = 0
         
         requirements = self.bundle['requirement']
@@ -68,6 +70,7 @@ class BundlePricer(Pricer):
 
         if freeItems > 0:
             bundleBasket = {key: bundleBasket[key] - requirements.get(key, 0) * freeItems for key in bundleBasket}
+            bundleBasket = defaultdict(int, bundleBasket)
             runningtotal -= self.bundle['discount'] * freeItems
         
         if self.specialOffers:
@@ -98,4 +101,5 @@ class PricerFactory():
                 
         
         return new_pricingRules
+
 
