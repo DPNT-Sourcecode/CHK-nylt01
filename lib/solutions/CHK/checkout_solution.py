@@ -1,5 +1,5 @@
-from . import teller
-from . import store_objects
+import teller
+import store_objects
 
 
 # noinspection PyUnusedLocal
@@ -19,6 +19,7 @@ def checkout(skus):
     return runningtotal
 
 ##CODE FOR TESTING
-#if __name__ == '__main__':
-#    print(checkout('EEEEBB'))
+if __name__ == '__main__':
+    print(checkout('EEB'))
+
 

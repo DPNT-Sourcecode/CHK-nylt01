@@ -1,4 +1,4 @@
-from . import pricing
+import pricing
 from collections import defaultdict
 from typing import List
 
