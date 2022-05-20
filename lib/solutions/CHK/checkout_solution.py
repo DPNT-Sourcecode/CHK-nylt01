@@ -1,4 +1,4 @@
-from . import teller
+import teller
 
 
 # noinspection PyUnusedLocal
@@ -24,6 +24,11 @@ def checkout(skus):
     runningtotal = checkoutInstance.calculate_total(skus)
 
     return runningtotal
+
+#CODE FOR TESTING
+if __name__ == '__main__':
+    print(checkout('EEEEBB'))
+
 
 
 
