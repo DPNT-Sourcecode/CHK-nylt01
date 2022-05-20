@@ -19,9 +19,9 @@ class TestCheckout(unittest.TestCase):
         self.assertEqual(checkout_solution.checkout('EEBB'), 110) #favour customer
         self.assertEqual(checkout_solution.checkout('EEBBB'), 125)
         self.assertEqual(checkout_solution.checkout('AAAAA'), 200)
+        self.assertEqual(checkout_solution.checkout('AAAAAA'), 250)
         self.assertEqual(checkout_solution.checkout('ACAA'), 150)
         self.assertEqual(checkout_solution.checkout('ABABA'), 175)
-        
 
     def test_illegal_input(self):
         self.assertEqual(checkout_solution.checkout('a'), -1)
@@ -29,6 +29,5 @@ class TestCheckout(unittest.TestCase):
         self.assertEqual(checkout_solution.checkout('ABCa'), -1)
 
 
-#EEBB -> 110 or 125    -> Bundle dominates
-#EEBBB -> 125
+
 
