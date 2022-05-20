@@ -29,13 +29,13 @@ pricingRules = [
         {'item': 'Z', 'unitPrice': 21, 'groupID': 1}
     ]
 
-bundledict = {
+bundleDict = {
     1: {'requirement': {'E': 2, 'B': 1}, 'discount': 30},
     2: {'requirement': {'N': 3, 'M': 1}, 'discount': 15},
     3: {'requirement': {'R': 3, 'Q': 1}, 'discount': 30}
 }
 
-groupdict = {
+groupDict = {
     1: {'groupMembers': 'STXYZ', 'groupQuantity': 3, 'groupPrice': 45}
 }
 
@@ -71,6 +71,7 @@ class Products(Enum):
     X = auto()
     Y = auto()
     Z = auto()
+
 
 
 

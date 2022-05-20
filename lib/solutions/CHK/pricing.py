@@ -120,24 +120,25 @@ class GroupPricer(Pricer):
         return runningtotal, sharedBasket
 
 class PricerFactory():
-    def get_pricers(self, pricingRules:List[dict]) -> Dict[str, Pricer]:
+    def get_pricers(self, pricingRules:List[dict], bundleDict:dict, groupDict:dict) -> Dict[str, Pricer]:
         newPricingRules = dict()
         productUnitPrices = {ruleset['item']: ruleset['unitPrice'] for ruleset in pricingRules}
 
         for ruleset in pricingRules:
             if all(key in ruleset for key in('bundle', 'special')):
-                newPricingRules[ruleset['item']] = BundlePricer(ruleset['item'], ruleset['unitPrice'], ruleset['bundle'], ruleset['special'])
+                newPricingRules[ruleset['item']] = BundlePricer(ruleset['item'], ruleset['unitPrice'], bundleDict[ruleset['bundleID']], ruleset['special'])
             elif 'bundle' in ruleset:
-                newPricingRules[ruleset['item']] = BundlePricer(ruleset['item'], ruleset['unitPrice'], ruleset['bundle'])               
+                newPricingRules[ruleset['item']] = BundlePricer(ruleset['item'], ruleset['unitPrice'], bundleDict[ruleset['bundleID']])               
             elif 'special' in ruleset:
                 newPricingRules[ruleset['item']] = SpecialPricer(ruleset['unitPrice'], ruleset['special'])     
             elif 'group' in ruleset:
-                newPricingRules[ruleset['item']] = GroupPricer(ruleset['item'], ruleset['unitPrice'], ruleset['group'], productUnitPrices)         
+                newPricingRules[ruleset['item']] = GroupPricer(ruleset['item'], ruleset['unitPrice'], groupDict[ruleset['groupID']], productUnitPrices)         
             else:
                 newPricingRules[ruleset['item']] = SimplePricer(ruleset['unitPrice'])
             
 
         
         return newPricingRules
+
 
 
