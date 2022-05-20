@@ -106,7 +106,7 @@ class GroupPricer(Pricer):
 
             #calculate actual price of removed items and apply discount
             actualPrice = sum(self.productUnitPrices[item] for item in groupItemsPriceSortedHighLow[0 : completeGroups * self.groupInfo['groupQuantity']])
-            runningtotal -= (actualPrice - self.groupInfo['groupPrice'])
+            runningtotal -= (actualPrice - self.groupInfo['groupPrice'] * completeGroups)
 
             #update sharedBasket
             del groupItemsPriceSortedHighLow[0 : completeGroups * self.groupInfo['groupQuantity']]
@@ -139,4 +139,5 @@ class PricerFactory():
 
         
         return newPricingRules
+
 
