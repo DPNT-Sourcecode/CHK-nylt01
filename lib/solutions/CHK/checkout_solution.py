@@ -15,7 +15,7 @@ def checkout(skus):
             {'item': 'B', 'unitPrice': 30, 'special': [(2, 45)], 'bundle': {'requirement': 'EE', 'free': 'B'}}, 
             {'item': 'C', 'unitPrice': 20}, 
             {'item': 'D', 'unitPrice': 15},
-            {'item': 'E', 'unitPrice': 40, 'bundle': {'requirement': 'EE', 'free': 'B'}}
+            {'item': 'E', 'unitPrice': 40, 'bundle': {'requirement': {'E': 2}, 'free': 'B'}}
         ]
     
     checkoutInstance = teller.Checkout(pricingRules)
@@ -23,6 +23,7 @@ def checkout(skus):
     runningtotal = checkoutInstance.calculate_total(skus)
 
     return runningtotal
+
 
 
 
