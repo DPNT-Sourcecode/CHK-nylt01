@@ -50,11 +50,14 @@ class TestCheckout(unittest.TestCase):
         self.assertEqual(checkout_solution.checkout('ABCZYX'), 145)
         self.assertEqual(checkout_solution.checkout('UUUUZYX'), 165)
         self.assertEqual(checkout_solution.checkout('NNNMZYX'), 165)
+        self.assertEqual(checkout_solution.checkout('ZYXX'), 62) #favour customer
+        self.assertEqual(checkout_solution.checkout('ZYXZ'), 62) #favour customer
 
     def test_illegal_input(self):
         self.assertEqual(checkout_solution.checkout('a'), -1)
         self.assertEqual(checkout_solution.checkout('-'), -1)
         self.assertEqual(checkout_solution.checkout('ABCa'), -1)
+
 
 
 
