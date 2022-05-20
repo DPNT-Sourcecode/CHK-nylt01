@@ -27,7 +27,7 @@ class SimplePricer(Pricer):
 class SpecialPricer(Pricer):
     def __init__(self, unitPrice:int, specialOffers:List[tuple]) -> None:
         self.unitPrice = unitPrice
-        self.specialOffers = specialOffers
+        self.specialOffers = sorted(specialOffers, key=lambda x: x[1], reverse=True) #apply biggest offer first
         self.quantity = 0
 
     def increment(self) -> None:
@@ -101,6 +101,7 @@ class PricerFactory():
                 
         
         return new_pricingRules
+
 
 
 

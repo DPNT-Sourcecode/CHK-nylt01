@@ -30,11 +30,19 @@ class TestCheckout(unittest.TestCase):
         self.assertEqual(checkout_solution.checkout('FFFFF'), 40)
         self.assertEqual(checkout_solution.checkout('FFFFFF'), 40)
         self.assertEqual(checkout_solution.checkout('AFAFAF'), 150)
+        self.assertEqual(checkout_solution.checkout('HHHHHHHHHH'), 80)
+        self.assertEqual(checkout_solution.checkout('AFAFAF'), 150)
+        self.assertEqual(checkout_solution.checkout('AFAFAF'), 150)
+        self.assertEqual(checkout_solution.checkout('AFAFAF'), 150)
+        self.assertEqual(checkout_solution.checkout('AFAFAF'), 150)
+        self.assertEqual(checkout_solution.checkout('AFAFAF'), 150)
+        self.assertEqual(checkout_solution.checkout('AFAFAF'), 150)
  
 
     def test_illegal_input(self):
         self.assertEqual(checkout_solution.checkout('a'), -1)
         self.assertEqual(checkout_solution.checkout('-'), -1)
         self.assertEqual(checkout_solution.checkout('ABCa'), -1)
+
 
 

@@ -8,7 +8,7 @@ pricingRules = [
         {'item': 'E', 'unitPrice': 40, 'bundle': {'requirement': {'E': 2, 'B': 1}, 'discount': 30}},
         {'item': 'F', 'unitPrice': 10, 'special': [(3, 20)]},
         {'item': 'G', 'unitPrice': 20},
-        {'item': 'H', 'unitPrice': 10, 'special': [(10, 80), (5, 45)]},
+        {'item': 'H', 'unitPrice': 10, 'special': [(5, 45), (10, 80)]},
         {'item': 'I', 'unitPrice': 35},
         {'item': 'J', 'unitPrice': 60},
         {'item': 'K', 'unitPrice': 80, 'special': [(2, 150)]},
@@ -22,7 +22,7 @@ pricingRules = [
         {'item': 'S', 'unitPrice': 30},
         {'item': 'T', 'unitPrice': 20},
         {'item': 'U', 'unitPrice': 40, 'special': [(4, 120)]},
-        {'item': 'V', 'unitPrice': 50, 'special': [(3, 130), (2, 90)]},
+        {'item': 'V', 'unitPrice': 50, 'special': [(2, 90), (3, 130)]},
         {'item': 'W', 'unitPrice': 20},
         {'item': 'X', 'unitPrice': 90},
         {'item': 'Y', 'unitPrice': 10},
@@ -61,6 +61,7 @@ class Products(Enum):
     X = auto()
     Y = auto()
     Z = auto()
+
 
 
 
