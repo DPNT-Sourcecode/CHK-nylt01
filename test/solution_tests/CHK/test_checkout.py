@@ -38,10 +38,25 @@ class TestCheckout(unittest.TestCase):
         self.assertEqual(checkout_solution.checkout('AFAFAF'), 150)
         self.assertEqual(checkout_solution.checkout('AFAFAF'), 150)
  
+    def test_GroupPricer(self):
+        self.assertEqual(checkout_solution.checkout('SSS'), 45)
+        self.assertEqual(checkout_solution.checkout('TTT'), 45)
+        self.assertEqual(checkout_solution.checkout('XXX'), 45)
+        self.assertEqual(checkout_solution.checkout('YYY'), 45)
+        self.assertEqual(checkout_solution.checkout('ZZZ'), 45)
+        self.assertEqual(checkout_solution.checkout('SXY'), 45)
+        self.assertEqual(checkout_solution.checkout('ZYX'), 45)
+        self.assertEqual(checkout_solution.checkout('ZYX'), 45)
+        self.assertEqual(checkout_solution.checkout('ABCZYX'), 145)
+        self.assertEqual(checkout_solution.checkout('UUUUZYX'), 165)
+        self.assertEqual(checkout_solution.checkout('NNNMZYX'), 165)
 
     def test_illegal_input(self):
         self.assertEqual(checkout_solution.checkout('a'), -1)
         self.assertEqual(checkout_solution.checkout('-'), -1)
         self.assertEqual(checkout_solution.checkout('ABCa'), -1)
+
+
+
 
 
