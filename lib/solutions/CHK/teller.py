@@ -1,10 +1,11 @@
+from tokenize import group
 from .import pricing
 from collections import defaultdict
 from typing import List
 
 class Teller:
-    def __init__(self, pricingRules:List[dict]):
-        self.pricers = pricing.PricerFactory().get_pricers(pricingRules)
+    def __init__(self, pricingRules:List[dict], bundleDict:dict, groupDict:dict):
+        self.pricers = pricing.PricerFactory().get_pricers(pricingRules, bundleDict, groupDict)
         self.sharedBasket = defaultdict(int)
 
     def add_item(self, item:str) -> None:
