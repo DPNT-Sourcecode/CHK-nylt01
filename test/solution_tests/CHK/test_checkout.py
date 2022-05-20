@@ -21,4 +21,3 @@ class TestCheckout(unittest.TestCase):
         self.assertEqual(checkout_solution.checkout('-'), -1)
         self.assertEqual(checkout_solution.checkout('ABCa'), -1)
 
-
