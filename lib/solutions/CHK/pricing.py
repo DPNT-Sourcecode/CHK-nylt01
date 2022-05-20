@@ -1,8 +1,6 @@
 from abc import ABC, abstractmethod
-from email.policy import default
-from tokenize import group
 from typing import Dict, List, Tuple
-from collections import defaultdict, Counter
+from collections import defaultdict
 import math
 
 class Pricer(ABC):
@@ -141,4 +139,5 @@ class PricerFactory():
 
         
         return newPricingRules
+
 
