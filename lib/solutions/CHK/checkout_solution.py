@@ -11,8 +11,8 @@ def checkout(skus):
             return -1
 
     pricingRules = [
-            {'item': 'A', 'unitPrice': 50, 'special': {1: {'specialQuantity': 5, 'specialPrice': 200}, 2:{'specialQuantity': 3, 'specialPrice': 130}}}, 
-            {'item': 'B', 'unitPrice': 30, 'special': {'specialQuantity': 2, 'specialPrice': 45}}, 
+            {'item': 'A', 'unitPrice': 50, 'special': [(5, 200), (3, 130)]}, 
+            {'item': 'B', 'unitPrice': 30, 'special': [(2, 45)], 'bundle': 'EEB'}, 
             {'item': 'C', 'unitPrice': 20}, 
             {'item': 'D', 'unitPrice': 15},
             {'item': 'E', 'unitPrice': 40, 'bundle': 'EEB'}
