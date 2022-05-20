@@ -12,7 +12,7 @@ class TestCheckout(unittest.TestCase):
         self.assertEqual(checkout_solution.checkout('E'), 40)
         self.assertEqual(checkout_solution.checkout('F'), 10)
  
-    def test_special_offers(self):
+    def test_SpecialPricer_and_BundlePricer(self):
         self.assertEqual(checkout_solution.checkout('AAA'), 130)
         self.assertEqual(checkout_solution.checkout('BB'), 45)
         self.assertEqual(checkout_solution.checkout('EE'), 80)
@@ -57,6 +57,7 @@ class TestCheckout(unittest.TestCase):
         self.assertEqual(checkout_solution.checkout('a'), -1)
         self.assertEqual(checkout_solution.checkout('-'), -1)
         self.assertEqual(checkout_solution.checkout('ABCa'), -1)
+
 
 
 
