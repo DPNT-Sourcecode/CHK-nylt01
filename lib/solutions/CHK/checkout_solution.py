@@ -1,28 +1,27 @@
-
+import teller
 
 # noinspection PyUnusedLocal
 # skus = unicode string
 def checkout(skus):
     if not skus:
         return 0
-        
+
     for letter in skus:
-        if letter not in ['A', 'B', 'C', 'D']:
+        if letter not in ['A', 'B', 'C', 'D', 'E']:
             return -1
 
-    runningtotal =0
+    pricingRules = [
+            {'item': 'A', 'unitPrice': 50, 'special': {1: {'specialQuantity': 5, 'specialPrice': 200}, 2:{'specialQuantity': 3, 'specialPrice': 130}}}, 
+            {'item': 'B', 'unitPrice': 30, 'special': {'specialQuantity': 2, 'specialPrice': 45}}, 
+            {'item': 'C', 'unitPrice': 20}, 
+            {'item': 'D', 'unitPrice': 15},
+            {'item': 'E', 'unitPrice': 40, 'bundle': 'EEB'}
+        ]
+    
+    checkoutInstance = teller.Checkout(pricingRules)
 
-    number_of_A = sum(1 for letter in skus if letter == 'A')
-    runningtotal += (number_of_A // 3) * 130 + (number_of_A % 3) * 50
-
-    number_of_B = sum(1 for letter in skus if letter == 'B')
-    runningtotal += (number_of_B // 2) * 45 + (number_of_B % 2) * 30
-
-    number_of_C = sum(1 for letter in skus if letter == 'C')
-    runningtotal += number_of_C * 20
-
-    number_of_C = sum(1 for letter in skus if letter == 'D')
-    runningtotal += number_of_C * 15
+    runningtotal = checkoutInstance.calculate_total(skus)
 
     return runningtotal
+
 
