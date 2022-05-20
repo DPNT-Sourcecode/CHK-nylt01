@@ -1,7 +1,8 @@
 from abc import ABC, abstractmethod
 from email.policy import default
+from tokenize import group
 from typing import Dict, List, Tuple
-from collections import defaultdict
+from collections import defaultdict, Counter
 import math
 
 class Pricer(ABC):
@@ -58,23 +59,23 @@ class BundlePricer(Pricer):
     def increment(self) -> None:
         self.quantity += 1
     
-    def total(self, bundleBasket:defaultdict) -> Tuple[int, defaultdict]: 
+    def total(self, sharedBasket:defaultdict) -> Tuple[int, defaultdict]: 
         runningtotal = 0
         
         requirements = self.bundle['requirement']
         freeItems = math.inf
         for key, value in requirements.items():
-            multiples = bundleBasket[key] // value
+            multiples = sharedBasket[key] // value
             if multiples < freeItems:
                 freeItems = multiples
 
         if freeItems > 0:
-            bundleBasket = {key: bundleBasket[key] - requirements.get(key, 0) * freeItems for key in bundleBasket}
-            bundleBasket = defaultdict(int, bundleBasket) #
+            sharedBasket = {key: sharedBasket[key] - requirements.get(key, 0) * freeItems for key in sharedBasket}
+            sharedBasket = defaultdict(int, sharedBasket) 
             runningtotal -= self.bundle['discount'] * freeItems
         
         if self.specialOffers:
-            itemsForSpecialOffer = bundleBasket[self.item]
+            itemsForSpecialOffer = sharedBasket[self.item]
             for specialQuantity, specialPrice in self.specialOffers:
                 specialOffersToApply = itemsForSpecialOffer // specialQuantity
                 runningtotal += specialOffersToApply * specialPrice
@@ -84,33 +85,61 @@ class BundlePricer(Pricer):
         else:
             runningtotal += self.quantity * self.unitPrice
 
-        return runningtotal, bundleBasket
+        return runningtotal, sharedBasket
 
 class GroupPricer(Pricer):
-    def __init__(self, item:str, unitPrice:int) -> None:
+    def __init__(self, item:str, unitPrice:int, groupInfo:dict, productUnitPrices:dict) -> None:
         self.item = item
         self.unitPrice = unitPrice
         self.quantity = 0
+        self.groupInfo = groupInfo
+        self.productUnitPrices = productUnitPrices
 
     def increment(self) -> None:
         self.quantity += 1
 
-    def total(self) -> Tuple[int, defaultdict]:
-        pass
+    def total(self, sharedBasket:defaultdict) -> Tuple[int, defaultdict]:
+        runningtotal = 0
+        groupItems = [i for i in sharedBasket for j in range(sharedBasket[i]) if j in self.groupInfo['groupMembers']]
+        completeGroups = len(groupItems) // self.groupInfo['groupQuantity']
+
+        if completeGroups > 0:
+            groupItemsPriceSortedHighLow = sorted(groupItems, key = lambda x: self.productUnitPrices[x], reverse = True)
+
+            #calculate actual price of removed items and apply discount
+            actualPrice = sum(self.productUnitPrices[item] for item in groupItemsPriceSortedHighLow[0 : completeGroups * self.groupInfo['groupQuantity']])
+            runningtotal -= (actualPrice - self.groupInfo['groupPrice'])
+
+            #update sharedBasket
+            del groupItemsPriceSortedHighLow[0 : completeGroups * self.groupInfo['groupQuantity']]
+            sharedBasket = defaultdict(int)
+            for item in groupItemsPriceSortedHighLow:
+                sharedBasket[item] = sharedBasket.get(item, 0) +1
+
+        runningtotal += self.quantity * self.unitPrice
+
+        
+        return runningtotal, sharedBasket
 
 class PricerFactory():
     def get_pricers(self, pricingRules:List[dict]) -> Dict[str, Pricer]:
-        new_pricingRules = dict()
+        newPricingRules = dict()
+        productUnitPrices = {ruleset['item']: ruleset['unitPrice'] for ruleset in pricingRules}
+
         for ruleset in pricingRules:
             if all(key in ruleset for key in('bundle', 'special')):
-                new_pricingRules[ruleset['item']] = BundlePricer(ruleset['item'], ruleset['unitPrice'], ruleset['bundle'], ruleset['special'])
+                newPricingRules[ruleset['item']] = BundlePricer(ruleset['item'], ruleset['unitPrice'], ruleset['bundle'], ruleset['special'])
             elif 'bundle' in ruleset:
-                new_pricingRules[ruleset['item']] = BundlePricer(ruleset['item'], ruleset['unitPrice'], ruleset['bundle'])               
+                newPricingRules[ruleset['item']] = BundlePricer(ruleset['item'], ruleset['unitPrice'], ruleset['bundle'])               
             elif 'special' in ruleset:
-                new_pricingRules[ruleset['item']] = SpecialPricer(ruleset['unitPrice'], ruleset['special'])              
+                newPricingRules[ruleset['item']] = SpecialPricer(ruleset['unitPrice'], ruleset['special'])     
+            elif 'group' in ruleset:
+                newPricingRules[ruleset['item']] = GroupPricer(ruleset['item'], ruleset['unitPrice'], productUnitPrices)         
             else:
-                new_pricingRules[ruleset['item']] = SimplePricer(ruleset['unitPrice'])
-                
+                newPricingRules[ruleset['item']] = SimplePricer(ruleset['unitPrice'])
+            
+
         
-        return new_pricingRules
+        return newPricingRules
+
 

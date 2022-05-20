@@ -5,10 +5,10 @@ from typing import List
 class Teller:
     def __init__(self, pricingRules:List[dict]):
         self.pricers = pricing.PricerFactory().get_pricers(pricingRules)
-        self.bundlePricerBasket = defaultdict(int)
+        self.sharedBasket = defaultdict(int)
 
     def add_item(self, item:str) -> None:
-        self.bundlePricerBasket[item] += 1
+        self.sharedBasket[item] += 1
         self.pricers[item].increment()
     
     def calculate_total(self, skus:str) -> int:
@@ -17,8 +17,8 @@ class Teller:
 
         runningTotal = 0
         for pricer in self.pricers.values():
-            if isinstance(pricer, pricing.BundlePricer): 
-                total, self.bundlePricerBasket = pricer.total(self.bundlePricerBasket)
+            if isinstance(pricer, pricing.BundlePricer) or isinstance(pricer, pricing.GroupPricer): 
+                total, self.sharedBasket = pricer.total(self.sharedBasket)
                 runningTotal += total
             else:
                 runningTotal += pricer.total()
