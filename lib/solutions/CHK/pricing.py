@@ -67,11 +67,11 @@ class BundlePricer(Pricer):
                 freeItems = multiples
 
         if freeItems > 0:
-            bundleBasketUpdated = {key: bundleBasket[key] - requirements.get(key, 0) * freeItems for key in bundleBasket}
+            bundleBasket = {key: bundleBasket[key] - requirements.get(key, 0) * freeItems for key in bundleBasket}
             runningtotal -= self.bundle['discount']
         
         if self.specialOffers:
-            itemsForSpecialOffer = bundleBasketUpdated[self.item]
+            itemsForSpecialOffer = bundleBasket[self.item]
             for specialQuantity, specialPrice in self.specialOffers:
                 specialOffersToApply = itemsForSpecialOffer // specialQuantity
                 runningtotal += specialOffersToApply * specialPrice
@@ -81,7 +81,7 @@ class BundlePricer(Pricer):
         else:
             runningtotal += self.quantity * self.unitPrice
 
-        return runningtotal, bundleBasketUpdated
+        return runningtotal, bundleBasket
 
 class PricerFactory():
     def get_pricers(self, pricingRules:List[dict]) -> Dict[str, Pricer]:
@@ -98,4 +98,5 @@ class PricerFactory():
                 
         
         return new_pricingRules
+
 
