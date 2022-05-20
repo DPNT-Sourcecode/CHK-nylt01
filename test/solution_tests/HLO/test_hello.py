@@ -1,6 +1,7 @@
-from solutions.TST import one
+from solutions.HLO import hello_solution
+import unittest
 
 
-class TestSum():
-    def test_sum(self):
-        assert one.get() == 1
+class TestHLO(unittest.TestCase):
+    def test_hello(self):
+        self.assertEqual(hello_solution.hello('John'), 'Hello, John!')
