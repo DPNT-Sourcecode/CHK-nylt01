@@ -19,15 +19,16 @@ pricingRules = [
         {'item': 'P', 'unitPrice': 50, 'special': [(5, 200)]},
         {'item': 'Q', 'unitPrice': 30, 'special': [(3, 80)], 'bundle': {'requirement': {'R': 3, 'Q': 1}, 'discount': 30}},
         {'item': 'R', 'unitPrice': 50, 'bundle': {'requirement': {'R': 3, 'Q': 1}, 'discount': 30}},
-        {'item': 'S', 'unitPrice': 20, 'group': {'groupID': 1, 'groupQuantity': 3, 'groupPrice': 45}},
-        {'item': 'T', 'unitPrice': 20, 'group': {'groupID': 1, 'groupQuantity': 3, 'groupPrice': 45}},
+        {'item': 'S', 'unitPrice': 20, 'group': {'groupMembers': 'STXYZ', 'groupQuantity': 3, 'groupPrice': 45}},
+        {'item': 'T', 'unitPrice': 20, 'group': {'groupMembers': 'STXYZ', 'groupQuantity': 3, 'groupPrice': 45}},
         {'item': 'U', 'unitPrice': 40, 'special': [(4, 120)]},
         {'item': 'V', 'unitPrice': 50, 'special': [(2, 90), (3, 130)]},
         {'item': 'W', 'unitPrice': 20},
-        {'item': 'X', 'unitPrice': 17, 'group': {'groupID': 1, 'groupQuantity': 3, 'groupPrice': 45}},
-        {'item': 'Y', 'unitPrice': 20, 'group': {'groupID': 1, 'groupQuantity': 3, 'groupPrice': 45}},
-        {'item': 'Z', 'unitPrice': 21, 'group': {'groupID': 1, 'groupQuantity': 3, 'groupPrice': 45}}
+        {'item': 'X', 'unitPrice': 17, 'group': {'groupMembers': 'STXYZ', 'groupQuantity': 3, 'groupPrice': 45}},
+        {'item': 'Y', 'unitPrice': 20, 'group': {'groupMembers': 'STXYZ', 'groupQuantity': 3, 'groupPrice': 45}},
+        {'item': 'Z', 'unitPrice': 21, 'group': {'groupMembers': 'STXYZ', 'groupQuantity': 3, 'groupPrice': 45}}
     ]
+
 
 class Products(Enum):
     @classmethod
@@ -61,5 +62,6 @@ class Products(Enum):
     X = auto()
     Y = auto()
     Z = auto()
+
 
 
