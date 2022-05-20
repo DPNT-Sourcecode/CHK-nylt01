@@ -46,17 +46,19 @@ class TestCheckout(unittest.TestCase):
         self.assertEqual(checkout_solution.checkout('ZZZ'), 45)
         self.assertEqual(checkout_solution.checkout('SXY'), 45)
         self.assertEqual(checkout_solution.checkout('ZYX'), 45)
-        self.assertEqual(checkout_solution.checkout('ZYX'), 45)
+        self.assertEqual(checkout_solution.checkout('ZYXZYX'), 90)
         self.assertEqual(checkout_solution.checkout('ABCZYX'), 145)
         self.assertEqual(checkout_solution.checkout('UUUUZYX'), 165)
         self.assertEqual(checkout_solution.checkout('NNNMZYX'), 165)
         self.assertEqual(checkout_solution.checkout('ZYXX'), 62) #favour customer
-        self.assertEqual(checkout_solution.checkout('ZYXZ'), 62) #favour customer
-
+        self.assertEqual(checkout_solution.checkout('ABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWXYZ'), 1602) 
+        self.assertEqual(checkout_solution.checkout('LGCKAQXFOSKZGIWHNRNDITVBUUEOZXPYAVFDEPTBMQLYJRSMJCWH'), 1602) 
+        
     def test_illegal_input(self):
         self.assertEqual(checkout_solution.checkout('a'), -1)
         self.assertEqual(checkout_solution.checkout('-'), -1)
         self.assertEqual(checkout_solution.checkout('ABCa'), -1)
+
 
 
 
