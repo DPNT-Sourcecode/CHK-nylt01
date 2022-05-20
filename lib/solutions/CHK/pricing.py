@@ -58,7 +58,7 @@ class BundlePricer(Pricer):
     def increment(self) -> None:
         self.quantity += 1
     
-    def total(self, bundleBasket:defaultdict) -> Tuple[int, List[str]]: 
+    def total(self, bundleBasket:defaultdict) -> Tuple[int, defaultdict]: 
         runningtotal = 0
         
         requirements = self.bundle['requirement']
@@ -86,6 +86,18 @@ class BundlePricer(Pricer):
 
         return runningtotal, bundleBasket
 
+class GroupPricer(Pricer):
+    def __init__(self, item:str, unitPrice:int) -> None:
+        self.item = item
+        self.unitPrice = unitPrice
+        self.quantity = 0
+
+    def increment(self) -> None:
+        self.quantity += 1
+
+    def total(self) -> Tuple[int, defaultdict]:
+        pass
+
 class PricerFactory():
     def get_pricers(self, pricingRules:List[dict]) -> Dict[str, Pricer]:
         new_pricingRules = dict()
@@ -101,4 +113,5 @@ class PricerFactory():
                 
         
         return new_pricingRules
+
 
