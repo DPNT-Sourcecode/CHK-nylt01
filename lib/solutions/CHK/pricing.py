@@ -134,12 +134,13 @@ class PricerFactory():
             elif 'special' in ruleset:
                 newPricingRules[ruleset['item']] = SpecialPricer(ruleset['unitPrice'], ruleset['special'])     
             elif 'group' in ruleset:
-                newPricingRules[ruleset['item']] = GroupPricer(ruleset['item'], ruleset['unitPrice'], productUnitPrices)         
+                newPricingRules[ruleset['item']] = GroupPricer(ruleset['item'], ruleset['unitPrice'], ruleset['group'], productUnitPrices)         
             else:
                 newPricingRules[ruleset['item']] = SimplePricer(ruleset['unitPrice'])
             
 
         
         return newPricingRules
+
 
 
