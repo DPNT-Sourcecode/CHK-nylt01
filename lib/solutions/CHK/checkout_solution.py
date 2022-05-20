@@ -1,4 +1,5 @@
 from . import teller
+from . import store_objects
 
 
 # noinspection PyUnusedLocal
@@ -7,25 +8,18 @@ def checkout(skus):
     if not skus:
         return 0
 
-    for letter in skus:
-        if letter not in ['A', 'B', 'C', 'D', 'E']:
+    for product in skus:
+        if product not in store_objects.Products.keys():
             return -1
-
-    pricingRules = [
-            {'item': 'A', 'unitPrice': 50, 'special': [(5, 200), (3, 130)]}, 
-            {'item': 'B', 'unitPrice': 30, 'special': [(2, 45)], 'bundle': {'requirement': {'E': 2, 'B': 1}, 'discount': 30}}, 
-            {'item': 'C', 'unitPrice': 20}, 
-            {'item': 'D', 'unitPrice': 15},
-            {'item': 'E', 'unitPrice': 40, 'bundle': {'requirement': {'E': 2, 'B': 1}, 'discount': 30}}
-        ]
     
-    checkoutInstance = teller.Checkout(pricingRules)
+    tellerInstance = teller.Teller(store_objects.pricingRules)
 
-    runningtotal = checkoutInstance.calculate_total(skus)
+    runningtotal = tellerInstance.calculate_total(skus)
 
     return runningtotal
 
 ##CODE FOR TESTING
 #if __name__ == '__main__':
 #    print(checkout('EEEEBB'))
+
 
