@@ -24,7 +24,3 @@ class Checkout:
                 runningTotal += pricer.total()
 
         return runningTotal
-
-
-
-

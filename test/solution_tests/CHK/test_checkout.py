@@ -30,4 +30,3 @@ class TestCheckout(unittest.TestCase):
         self.assertEqual(checkout_solution.checkout('ABCa'), -1)
 
 
-
