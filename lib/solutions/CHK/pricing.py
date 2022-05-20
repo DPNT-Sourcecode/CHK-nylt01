@@ -100,7 +100,7 @@ class GroupPricer(Pricer):
 
     def total(self, sharedBasket:defaultdict) -> Tuple[int, defaultdict]:
         runningtotal = 0
-        groupItems = [i for i in sharedBasket for j in range(sharedBasket[i]) if j in self.groupInfo['groupMembers']]
+        groupItems = [i for i in sharedBasket for j in range(sharedBasket[i]) if i in self.groupInfo['groupMembers']]
         completeGroups = len(groupItems) // self.groupInfo['groupQuantity']
 
         if completeGroups > 0:
@@ -141,6 +141,7 @@ class PricerFactory():
 
         
         return newPricingRules
+
 
 
 
