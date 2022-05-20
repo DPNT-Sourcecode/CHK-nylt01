@@ -3,6 +3,13 @@
 # noinspection PyUnusedLocal
 # skus = unicode string
 def checkout(skus):
+    if not skus:
+        return 0
+        
+    for letter in skus:
+        if letter not in ['A', 'B', 'C', 'D']:
+            return -1
+
     runningtotal =0
 
     number_of_A = sum(1 for letter in skus if letter == 'A')
@@ -18,3 +25,4 @@ def checkout(skus):
     runningtotal += number_of_C * 15
 
     return runningtotal
+
