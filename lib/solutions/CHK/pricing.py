@@ -140,6 +140,3 @@ class PricerFactory():
         
         return newPricingRules
 
-
-
-

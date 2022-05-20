@@ -24,4 +24,3 @@ class Teller:
                 runningTotal += pricer.total()
 
         return runningTotal
-
