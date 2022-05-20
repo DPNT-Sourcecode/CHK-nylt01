@@ -2,7 +2,7 @@ from . import pricing
 from collections import defaultdict
 from typing import List
 
-class Checkout:
+class Teller:
     def __init__(self, pricingRules:List[dict]):
         self.pricers = pricing.PricerFactory().get_pricers(pricingRules)
         self.bundleBasket = defaultdict(int)
