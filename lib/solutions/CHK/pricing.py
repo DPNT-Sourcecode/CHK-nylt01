@@ -125,13 +125,13 @@ class PricerFactory():
         productUnitPrices = {ruleset['item']: ruleset['unitPrice'] for ruleset in pricingRules}
 
         for ruleset in pricingRules:
-            if all(key in ruleset for key in('bundle', 'special')):
+            if all(key in ruleset for key in('bundleID', 'special')):
                 newPricingRules[ruleset['item']] = BundlePricer(ruleset['item'], ruleset['unitPrice'], bundleDict[ruleset['bundleID']], ruleset['special'])
-            elif 'bundle' in ruleset:
+            elif 'bundleID' in ruleset:
                 newPricingRules[ruleset['item']] = BundlePricer(ruleset['item'], ruleset['unitPrice'], bundleDict[ruleset['bundleID']])               
             elif 'special' in ruleset:
                 newPricingRules[ruleset['item']] = SpecialPricer(ruleset['unitPrice'], ruleset['special'])     
-            elif 'group' in ruleset:
+            elif 'groupID' in ruleset:
                 newPricingRules[ruleset['item']] = GroupPricer(ruleset['item'], ruleset['unitPrice'], groupDict[ruleset['groupID']], productUnitPrices)         
             else:
                 newPricingRules[ruleset['item']] = SimplePricer(ruleset['unitPrice'])
@@ -139,6 +139,7 @@ class PricerFactory():
 
         
         return newPricingRules
+
 
 
 
