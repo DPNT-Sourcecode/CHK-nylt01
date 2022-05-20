@@ -15,4 +15,3 @@ class TestCheckout(unittest.TestCase):
         self.assertEqual(checkout_solution.checkout('ACAA'), 150)
         self.assertEqual(checkout_solution.checkout('ABABA'), 175)
 
-
