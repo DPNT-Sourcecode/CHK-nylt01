@@ -5,7 +5,7 @@ from typing import List
 class Checkout:
     def __init__(self, pricingRules:List[dict]):
         self.pricers = pricing.PricerFactory().get_pricers(pricingRules)
-        self.bundleBasket = defaultdict()
+        self.bundleBasket = defaultdict(int)
 
     def add_item(self, item:str) -> None:
         self.bundleBasket[item] += 1

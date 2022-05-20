@@ -87,7 +87,7 @@ class PricerFactory():
     def get_pricers(self, pricingRules:List[dict]) -> Dict[str, Pricer]:
         new_pricingRules = dict()
         for ruleset in pricingRules:
-            if 'bundle' and 'special' in ruleset:
+            if all(key in ruleset for key in('bundle', 'special')):
                 new_pricingRules[ruleset['item']] = BundlePricer(ruleset['item'], ruleset['unitPrice'], ruleset['bundle'], ruleset['special'])
             elif 'bundle' in ruleset:
                 new_pricingRules[ruleset['item']] = BundlePricer(ruleset['item'], ruleset['unitPrice'], ruleset['bundle'])               
@@ -98,5 +98,4 @@ class PricerFactory():
                 
         
         return new_pricingRules
-
 
