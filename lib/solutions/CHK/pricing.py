@@ -68,7 +68,7 @@ class BundlePricer(Pricer):
 
         if freeItems > 0:
             bundleBasket = {key: bundleBasket[key] - requirements.get(key, 0) * freeItems for key in bundleBasket}
-            runningtotal -= self.bundle['discount']
+            runningtotal -= self.bundle['discount'] * freeItems
         
         if self.specialOffers:
             itemsForSpecialOffer = bundleBasket[self.item]
@@ -98,5 +98,6 @@ class PricerFactory():
                 
         
         return new_pricingRules
+
 
 

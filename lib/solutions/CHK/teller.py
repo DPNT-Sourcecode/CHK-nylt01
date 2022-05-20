@@ -1,4 +1,4 @@
-import pricing
+from . import pricing
 from collections import defaultdict
 from typing import List
 
@@ -24,6 +24,7 @@ class Checkout:
                 runningTotal += pricer.total()
 
         return runningTotal
+
 
 
 
