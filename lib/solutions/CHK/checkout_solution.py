@@ -19,7 +19,8 @@ def checkout(skus):
     return runningtotal
 
 ##CODE FOR TESTING
-#if __name__ == '__main__':
-#    print(checkout('EEEEBB'))
+if __name__ == '__main__':
+    print(checkout('EEEEBB'))
+
 
 

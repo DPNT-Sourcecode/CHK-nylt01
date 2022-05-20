@@ -10,11 +10,14 @@ class TestCheckout(unittest.TestCase):
         self.assertEqual(checkout_solution.checkout('C'), 20)
         self.assertEqual(checkout_solution.checkout('D'), 15)
         self.assertEqual(checkout_solution.checkout('E'), 40)
-
+        self.assertEqual(checkout_solution.checkout('F'), 10)
+ 
     def test_special_offers(self):
         self.assertEqual(checkout_solution.checkout('AAA'), 130)
         self.assertEqual(checkout_solution.checkout('BB'), 45)
         self.assertEqual(checkout_solution.checkout('EE'), 80)
+        self.assertEqual(checkout_solution.checkout('FF'), 20)
+        self.assertEqual(checkout_solution.checkout('FFF'), 20)
         self.assertEqual(checkout_solution.checkout('EEB'), 80)
         self.assertEqual(checkout_solution.checkout('EEBB'), 110) #favour customer
         self.assertEqual(checkout_solution.checkout('EEBBB'), 125)
@@ -23,10 +26,16 @@ class TestCheckout(unittest.TestCase):
         self.assertEqual(checkout_solution.checkout('AAAAAA'), 250)
         self.assertEqual(checkout_solution.checkout('ACAA'), 150)
         self.assertEqual(checkout_solution.checkout('ABABA'), 175)
+        self.assertEqual(checkout_solution.checkout('FFFF'), 30)
+        self.assertEqual(checkout_solution.checkout('FFFFF'), 40)
+        self.assertEqual(checkout_solution.checkout('FFFFFF'), 40)
+        self.assertEqual(checkout_solution.checkout('AFAFAF'), 150)
+ 
 
     def test_illegal_input(self):
         self.assertEqual(checkout_solution.checkout('a'), -1)
         self.assertEqual(checkout_solution.checkout('-'), -1)
         self.assertEqual(checkout_solution.checkout('ABCa'), -1)
+
 
 
