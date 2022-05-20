@@ -1,5 +1,5 @@
-import teller
-import unittest
+from . import teller
+
 
 # noinspection PyUnusedLocal
 # skus = unicode string
@@ -24,6 +24,7 @@ def checkout(skus):
     runningtotal = checkoutInstance.calculate_total(skus)
 
     return runningtotal
+
 
 
 
